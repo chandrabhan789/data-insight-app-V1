@@ -5,68 +5,33 @@ from io import StringIO
 # Must be the first Streamlit command
 st.set_page_config(page_title="Data Insight Generator", layout="centered")
 
-# Dark/Light mode CSS
-dark_mode = False
-
-# Check if user selected dark mode
-if st.checkbox("Enable Dark Mode"):
-    dark_mode = True
-
-# Custom CSS styling based on mode
-if dark_mode:
-    st.markdown("""
-        <style>
-            body {
-                background-color: #121212;
-                color: #ffffff;
-            }
-            .reportview-container .main .block-container {
-                padding-top: 2rem;
-                padding-bottom: 2rem;
-            }
-            .summary-box {
-                background-color: #333333;
-                border-radius: 10px;
-                padding: 20px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            }
-            .image-container {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .image-container img {
-                width: 48%;
-            }
-        </style>
-    """, unsafe_allow_html=True)
-else:
-    st.markdown("""
-        <style>
-            body {
-                background-color: #f5f7fa;
-                color: #000000;
-            }
-            .reportview-container .main .block-container {
-                padding-top: 2rem;
-                padding-bottom: 2rem;
-            }
-            .summary-box {
-                background-color: #ffffff;
-                border-radius: 10px;
-                padding: 20px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            }
-            .image-container {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            .image-container img {
-                width: 48%;
-            }
-        </style>
-    """, unsafe_allow_html=True)
+# Custom CSS styling
+st.markdown("""
+    <style>
+        body {
+            background-color: #f5f7fa;
+            color: #000000;
+        }
+        .reportview-container .main .block-container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .summary-box {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .image-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .image-container img {
+            width: 48%;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 # Header Images
 st.markdown("""
