@@ -28,6 +28,14 @@ st.markdown("""
             align-items: center;
         }
         .image-container img {
+            width: 20%;
+        }
+        .input-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .input-container > div {
             width: 48%;
         }
     </style>
@@ -45,16 +53,14 @@ st.markdown("""
 st.title("AI-Powered Data Insight Generator")
 st.markdown("Upload a CSV file or paste your tabular data below to generate insights.")
 
-# Layout for Search Bar and CSV Upload side-by-side
-col1, col2 = st.columns([3, 1])
+# Layout for Search Bar and CSV Upload in the same row
+st.markdown("---")
+col1, col2 = st.columns([1, 1])
 
-# Text Input in the left column (Search bar)
 with col1:
-    st.markdown("---")
     st.markdown("### OR Paste Data Below")
     user_input = st.text_area("Paste Data Here (CSV-style text)", height=200, placeholder="e.g. Student Name,Math Mark,Science Mark, Biology Mark\nStudent-1,59,95,21")
 
-# CSV Upload in the right column
 with col2:
     uploaded_file = st.file_uploader("Upload CSV File", type=["csv"])
 
