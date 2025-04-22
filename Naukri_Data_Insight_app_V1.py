@@ -15,6 +15,21 @@ st.markdown("---")
 st.markdown("### OR Paste Data Below")
 user_input = st.text_area("Paste Data Here (CSV-style text)", height=200, placeholder="e.g. Student Name,Math Mark,Science Mark, Biology Mark\nStudent-1,59,95,21")
 
+# Function to generate simple natural language summary
+def generate_summary(df):
+    summaries = []
+    for col in df.select_dtypes(include='number').columns:
+        max_val = df[col].max()
+        min_val = df[col].min()
+        mean_val = df[col].mean()
+
+        max_row = df[df[col] == max_val].iloc[0]
+        min_row = df[df[col] == min_val].iloc[0]
+
+        summaries.append(f"In '{col}', the highest value is {max_val} by {max_row[0]}, and the lowest is {min_val} by {min_row[0]}. The average is {mean_val:.2f}.")
+
+    return "\n".join(summaries)
+
 # Function to process and display insights
 def display_insights(df):
     st.subheader("Data Preview")
@@ -31,6 +46,9 @@ def display_insights(df):
         st.write(f"- Max: {df[col].max()}")
         st.write(f"- Min: {df[col].min()}")
         st.write(f"- Std Deviation: {df[col].std():.2f}")
+
+    st.subheader("Natural Language Summary")
+    st.markdown(generate_summary(df))
 
 # Logic to read input and display results
 if st.button("Generate Insights"):
