@@ -4,7 +4,7 @@ from io import StringIO
 
 st.set_page_config(page_title="Data Insight Generator", layout="centered")
 
-st.title("Reshu-OM AI-Powered Data Insight Generator")
+st.title("AI-Powered Data Insight Generator")
 st.markdown("Paste your tabular data (CSV-style text) in the box below and get instant insights.")
 
 user_input = st.text_area("Paste Data Here", height=200, placeholder="e.g. Student Name,Math Mark,Science Mark, Biology Mark\nStudent-1,59,95,21")
