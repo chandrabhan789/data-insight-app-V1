@@ -5,32 +5,68 @@ from io import StringIO
 # Must be the first Streamlit command
 st.set_page_config(page_title="Data Insight Generator", layout="centered")
 
-# Custom CSS styling
-st.markdown("""
-    <style>
-        body {
-            background-color: #f5f7fa;
-        }
-        .reportview-container .main .block-container {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-        .summary-box {
-            background-color: #ffffff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .image-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .image-container img {
-            width: 20%;
-        }
-    </style>
-""", unsafe_allow_html=True)
+# Dark/Light mode CSS
+dark_mode = False
+
+# Check if user selected dark mode
+if st.checkbox("Enable Dark Mode"):
+    dark_mode = True
+
+# Custom CSS styling based on mode
+if dark_mode:
+    st.markdown("""
+        <style>
+            body {
+                background-color: #121212;
+                color: #ffffff;
+            }
+            .reportview-container .main .block-container {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            .summary-box {
+                background-color: #333333;
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            .image-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .image-container img {
+                width: 48%;
+            }
+        </style>
+    """, unsafe_allow_html=True)
+else:
+    st.markdown("""
+        <style>
+            body {
+                background-color: #f5f7fa;
+                color: #000000;
+            }
+            .reportview-container .main .block-container {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            .summary-box {
+                background-color: #ffffff;
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            .image-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .image-container img {
+                width: 48%;
+            }
+        </style>
+    """, unsafe_allow_html=True)
 
 # Header Images
 st.markdown("""
@@ -44,13 +80,18 @@ st.markdown("""
 st.title("AI-Powered Data Insight Generator")
 st.markdown("Upload a CSV file or paste your tabular data below to generate insights.")
 
-# CSV Upload
-uploaded_file = st.file_uploader("Upload CSV File", type=["csv"])
+# Layout for Search Bar and CSV Upload side-by-side
+col1, col2 = st.columns([3, 1])
 
-# Text Input
-st.markdown("---")
-st.markdown("### OR Paste Data Below")
-user_input = st.text_area("Paste Data Here (CSV-style text)", height=200, placeholder="e.g. Student Name,Math Mark,Science Mark, Biology Mark\nStudent-1,59,95,21")
+# Text Input in the left column (Search bar)
+with col1:
+    st.markdown("---")
+    st.markdown("### OR Paste Data Below")
+    user_input = st.text_area("Paste Data Here (CSV-style text)", height=200, placeholder="e.g. Student Name,Math Mark,Science Mark, Biology Mark\nStudent-1,59,95,21")
+
+# CSV Upload in the right column
+with col2:
+    uploaded_file = st.file_uploader("Upload CSV File", type=["csv"])
 
 # Function to generate simple natural language summary
 def generate_summary(df):
