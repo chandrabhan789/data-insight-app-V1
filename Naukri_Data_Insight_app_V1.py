@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 from io import StringIO
 
 st.set_page_config(page_title="Data Insight Generator", layout="centered")
@@ -30,25 +31,20 @@ def generate_summary(df):
 
     return "\n".join(summaries)
 
+# Function to display charts
+def display_charts(df):
+    st.subheader("Charts & Visualizations")
+    numeric_cols = df.select_dtypes(include='number').columns
+    for col in numeric_cols:
+        fig, ax = plt.subplots()
+        df[col].plot(kind='bar', ax=ax, title=col)
+        st.pyplot(fig)
+
 # Function to process and display insights
 def display_insights(df):
-    st.subheader("Data Preview")
-    st.dataframe(df.head())
-
-    st.subheader("Summary Statistics")
-    st.dataframe(df.describe(include='all'))
-
-    st.subheader("Column-wise Insights")
-    for col in df.select_dtypes(include='number').columns:
-        st.markdown(f"**{col}**")
-        st.write(f"- Mean: {df[col].mean():.2f}")
-        st.write(f"- Median: {df[col].median():.2f}")
-        st.write(f"- Max: {df[col].max()}")
-        st.write(f"- Min: {df[col].min()}")
-        st.write(f"- Std Deviation: {df[col].std():.2f}")
-
     st.subheader("Natural Language Summary")
     st.markdown(generate_summary(df))
+    display_charts(df)
 
 # Logic to read input and display results
 if st.button("Generate Insights"):
