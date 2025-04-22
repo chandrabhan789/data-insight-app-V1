@@ -2,9 +2,32 @@ import streamlit as st
 import pandas as pd
 from io import StringIO
 
-st.image("https://your-image-url.com/logo.png", width=150) 
+# Must be the first Streamlit command
 st.set_page_config(page_title="Data Insight Generator", layout="centered")
 
+# Custom CSS styling
+st.markdown("""
+    <style>
+        body {
+            background-color: #f5f7fa;
+        }
+        .reportview-container .main .block-container {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        .summary-box {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Header Image
+st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Google-flutter-logo.png/768px-Google-flutter-logo.png", width=100)
+
+# App title
 st.title("AI-Powered Data Insight Generator")
 st.markdown("Upload a CSV file or paste your tabular data below to generate insights.")
 
@@ -34,7 +57,7 @@ def generate_summary(df):
 # Function to process and display insights
 def display_insights(df):
     st.subheader("Natural Language Summary")
-    st.markdown(generate_summary(df))
+    st.markdown(f"<div class='summary-box'>{generate_summary(df)}</div>", unsafe_allow_html=True)
 
 # Logic to read input and display results
 if st.button("Generate Insights"):
