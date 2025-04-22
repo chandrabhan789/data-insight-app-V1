@@ -53,17 +53,14 @@ st.markdown("""
 
 # App title
 st.title("AI-Powered Data Insight Generator")
-st.markdown("Upload a CSV file or paste your tabular data below to generate insights.")
+st.markdown("Paste your tabular data below to generate insights.")
 
-# Layout for Search Bar and CSV Upload in the same row
-col1, col2 = st.columns([3, 1])  # Adjusted to ensure better spacing
+# Layout for Search Bar (removed CSV Upload)
+col1 = st.columns([3])  # Making the search bar wider
 
 with col1:
-    st.markdown("### OR Paste Data Below")
+    st.markdown("### Paste Data Below")
     user_input = st.text_area("Paste Data Here (CSV-style text)", height=200, placeholder="e.g. Student Name,Math Mark,Science Mark, Biology Mark\nStudent-1,59,95,21")
-
-with col2:
-    uploaded_file = st.file_uploader("Upload CSV File", type=["csv"])
 
 # Function to generate simple natural language summary
 def generate_summary(df):
@@ -88,16 +85,12 @@ def display_insights(df):
 # Logic to read input and display results
 if st.button("Generate Insights"):
     try:
-        if uploaded_file is not None:
-            df = pd.read_csv(uploaded_file)
-            display_insights(df)
-
-        elif user_input:
+        if user_input:
             df = pd.read_csv(StringIO(user_input), sep=",|\t", engine="python")
             display_insights(df)
 
         else:
-            st.warning("Please upload a file or paste some data.")
+            st.warning("Please paste some data.")
 
     except Exception as e:
         st.error(f"Error processing data: {e}")
