@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from io import StringIO
 
+st.image("https://your-image-url.com/logo.png", width=150) 
 st.set_page_config(page_title="Data Insight Generator", layout="centered")
 
 st.title("AI-Powered Data Insight Generator")
