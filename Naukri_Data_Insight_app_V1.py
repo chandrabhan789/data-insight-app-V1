@@ -26,17 +26,19 @@ st.markdown("""
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 20px;
         }
         .image-container img {
-            width: 20%;
+            width: 20%;  /* Set images to 20% width */
         }
         .input-container {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
+            gap: 10px;
         }
         .input-container > div {
-            width: 48%;
+            width: 48%;  /* Both inputs take 48% width of the row */
         }
     </style>
 """, unsafe_allow_html=True)
@@ -55,7 +57,7 @@ st.markdown("Upload a CSV file or paste your tabular data below to generate insi
 
 # Layout for Search Bar and CSV Upload in the same row
 st.markdown("---")
-col1, col2 = st.columns([1, 1])
+col1, col2 = st.columns([2, 1])  # Making the search bar slightly wider
 
 with col1:
     st.markdown("### OR Paste Data Below")
