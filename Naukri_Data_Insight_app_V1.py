@@ -31,15 +31,6 @@ st.markdown("""
         .image-container img {
             width: 20%;  /* Set images to 20% width */
         }
-        .input-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-        .input-container > div {
-            width: 48%;  /* Both inputs take 48% width of the row */
-        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -55,12 +46,8 @@ st.markdown("""
 st.title("AI-Powered Data Insight Generator")
 st.markdown("Paste your tabular data below to generate insights.")
 
-# Layout for Search Bar (removed CSV Upload)
-col1 = st.columns([3])  # Making the search bar wider
-
-with col1:
-    st.markdown("### Paste Data Below")
-    user_input = st.text_area("Paste Data Here (CSV-style text)", height=200, placeholder="e.g. Student Name,Math Mark,Science Mark, Biology Mark\nStudent-1,59,95,21")
+# Input for the data (no column layout needed)
+user_input = st.text_area("Paste Data Here (CSV-style text)", height=200, placeholder="e.g. Student Name,Math Mark,Science Mark, Biology Mark\nStudent-1,59,95,21")
 
 # Function to generate simple natural language summary
 def generate_summary(df):
