@@ -27,7 +27,7 @@ st.markdown("""
             align-items: center;
         }
         .image-container img {
-            width: 48%;
+            width: 20%;
         }
     </style>
 """, unsafe_allow_html=True)
