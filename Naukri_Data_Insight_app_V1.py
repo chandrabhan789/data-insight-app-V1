@@ -21,11 +21,24 @@ st.markdown("""
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
+        .image-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .image-container img {
+            width: 48%;
+        }
     </style>
 """, unsafe_allow_html=True)
 
-# Header Image
-st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Google-flutter-logo.png/768px-Google-flutter-logo.png", width=100)
+# Header Images
+st.markdown("""
+    <div class='image-container'>
+        <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Infoedgelogo.png/500px-Infoedgelogo.png' alt='Image 1'>
+        <img src='https://upload.wikimedia.org/wikipedia/commons/f/fc/Naukri.png?20240329063224' alt='Image 2'>
+    </div>
+""", unsafe_allow_html=True)
 
 # App title
 st.title("AI-Powered Data Insight Generator")
